@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Unified Temporal & Planetary Gateway</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #e6f0ff 0%, #ffffff 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 950px;
+            background: white;
+            border-radius: 22px;
+            box-shadow: 0 18px 60px rgba(0, 82, 204, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .header {
+            background: linear-gradient(90deg, #0052cc 0%, #0077cc 100%);
+            color: white;
+            padding: 28px 35px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.05rem;
+            opacity: 0.92;
+        }
+
+        .tabs {
+            display: flex;
+            background: #f0f8ff;
+            border-bottom: 2px solid #cce6ff;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #0052cc;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            background: #0077cc;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 30px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .coordinates {
+            background: #f0f8ff;
+            padding: 14px 25px;
+            border-bottom: 2px solid #cce6ff;
+            font-family: 'Courier New', monospace;
+            font-size: 0.92rem;
+            color: #0052cc;
+            word-break: break-all;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #003366;
+            font-weight: 600;
+        }
+
+        .input-group input, .input-group select, .input-group button {
+            width: 100%;
+            padding: 13px 16px;
+            border: 2px solid #cce6ff;
+            border-radius: 12px;
+            font-size: 1rem;
+            background: white;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            border-color: #0077cc;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 119, 204, 0.2);
+        }
+
+        .btn {
+            background: linear-gradient(90deg, #0077cc 0%, #0052cc 100%);
+            color: white;
+            border: none;
+            padding: 16px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0, 82, 204, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 82, 204, 0.6);
+        }
+
+        .calibration-info, .payment-section, .brain-link {
+            background: #e6f7ff;
+            border-left: 4px solid #0077cc;
+            padding: 18px;
+            margin: 25px 0;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .calibration-info h4, .payment-section h4, .brain-link h4 {
+            color: #0052cc;
+            margin-bottom: 10px;
+        }
+
+        .brain-link a {
+            color: #d32f2f;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .brain-link a:hover {
+            text-decoration: underline;
+        }
+
+        .response {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8fbff;
+            border: 1px dashed #0077cc;
+            border-radius: 10px;
+            min-height: 60px;
+            display: none;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #0052cc;
+            font-size: 0.9rem;
+            background: #f0f8ff;
+            border-top: 2px solid #cce6ff;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.7rem;
+            }
+            .tabs {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Unified Temporal & Planetary Gateway</h1>
+            <p>Travel to Mars or navigate ±79 billion years through time — controlled by thought</p>
+        </div>
+
+        <div class="coordinates">
+            <strong>Coordinates:</strong> 000777777777777777777777777777777777777777777777777789000086789028486789028678902888678902841867890286<br>
+            <strong>Position:</strong> 0.382867800018678 | 0.00000086789028678980
+        </div>
+
+        <div class="tabs">
+            <div class="tab active" data-tab="time">Time Travel</div>
+            <div class="tab" data-tab="mars">Mars Gate</div>
+        </div>
+
+        <!-- TIME TRAVEL TAB -->
+        <div class="tab-content active" id="time-tab">
+            <div class="input-group">
+                <label for="departure-year">Departure Year</label>
+                <input type="number" id="departure-year" value="2025" min="-78902867890" max="7890867890">
+            </div>
+            <div class="input-group">
+                <label for="arrival-year">Arrival Year</label>
+                <input type="number" id="arrival-year" value="2025" min="-78902867890" max="7890867890">
+            </div>
+            <div class="input-group">
+                <label for="exact-date">Exact Date & Time (UTC)</label>
+                <input type="datetime-local" id="exact-date" value="2025-10-31T12:00">
+            </div>
+
+            <div class="calibration-info">
+                <h4>Temporal Calibration</h4>
+                <p>Default: 12 seconds in the past (unless user is <strong>davidgomadza</strong>).<br>
+                Time Calibration Velocity: Adjustable up to ±79 billion years.</p>
+            </div>
+
+            <div class="payment-section">
+                <h4>Activation Fee</h4>
+                <p><strong>8 BTC (AGT/BTCGT)</strong> or <strong>US$100</strong></p>
+            </div>
+
+            <button class="btn" id="time-submit">Initiate Temporal Jump</button>
+            <div class="response" id="time-response"></div>
+        </div>
+
+        <!-- MARS GATE TAB -->
+        <div class="tab-content" id="mars-tab">
+            <div class="input-group">
+                <label for="mars-destination">Mars Landing Zone</label>
+                <select id="mars-destination">
+                    <option value="valles_marineris">Valles Marineris</option>
+                    <option value="olympus_mons">Olympus Mons</option>
+                    <option value="jezero_crater">Jezero Crater</option>
+                    <option value="hellas_planitia">Hellas Planitia</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="mars-date">Departure Date (Earth Time)</label>
+                <input type="date" id="mars-date" value="2025-10-31">
+            </div>
+            <div class="input-group">
+                <label for="passenger-name">Passenger Name</label>
+                <input type="text" id="passenger-name" placeholder="Enter your name">
+            </div>
+
+            <div class="payment-section">
+                <h4>Launch Fee</h4>
+                <p><strong>8 BTC (AGT/BTCGT)</strong> or <strong>US$100</strong></p>
+            </div>
+
+            <button class="btn" id="mars-submit">Launch to Mars</button>
+            <div class="response" id="mars-response"></div>
+        </div>
+
+        <!-- BRAIN READER INTEGRATION -->
+        <div class="brain-link">
+            <h4>Control via Thought: CNB Wearable Brain Reader</h4>
+            <p>This system integrates with the <a href="https://github.com/davidgomadza/complete-brain-decoding-codec-system" target="_blank">Complete Brain Decoding Codec System</a> by David Gomadza.</p>
+            <p>Calibrate using: <em>“My voice is my password.”</em> Thoughts are captured from the right temple (Exit Point) and decoded in real time.</p>
+        </div>
+
+        <div class="footer">
+            Unified Gateway v2.1 • Temporal Authority & Interplanetary Transit • Patent Pending
+        </div>
+    </div>
+
+    <script>
+        // Tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab + '-tab').classList.add('active');
+            });
+        });
+
+        // AJAX simulation for Time Travel
+        document.getElementById('time-submit').addEventListener('click', function() {
+            const depYear = document.getElementById('departure-year').value;
+            const arrYear = document.getElementById('arrival-year').value;
+            const dateTime = document.getElementById('exact-date').value;
+
+            const responseDiv = document.getElementById('time-response');
+            responseDiv.style.display = 'block';
+            responseDiv.innerHTML = 'Initializing quantum chroniton field...';
+
+            setTimeout(() => {
+                responseDiv.innerHTML = `✅ Temporal jump confirmed!<br>
+                Departing: ${depYear}<br>
+                Arriving: ${arrYear}<br>
+                Exact UTC: ${dateTime || '12:00'}<br>
+                <em>Thought-controlled navigation active via CNB Brain Reader.</em>`;
+            }, 1800);
+        });
+
+        // AJAX simulation for Mars Launch
+        document.getElementById('mars-submit').addEventListener('click', function() {
+            const zone = document.getElementById('mars-destination').options[document.getElementById('mars-destination').selectedIndex].text;
+            const date = document.getElementById('mars-date').value;
+            const name = document.getElementById('passenger-name').value || 'Anonymous Traveler';
+
+            const responseDiv = document.getElementById('mars-response');
+            responseDiv.style.display = 'block';
+            responseDiv.innerHTML = 'Establishing orbital trajectory...';
+
+            setTimeout(() => {
+                responseDiv.innerHTML = `🚀 Launch sequence initiated!<br>
+                Passenger: ${name}<br>
+                Destination: ${zone}<br>
+                Departure: ${date}<br>
+                <em>Neural authentication verified via brain codec.</em>`;
+            }, 1800);
+        });
+    </script>
+</body>
+</html>
+
